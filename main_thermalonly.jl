@@ -11,6 +11,7 @@
 #      Replace it with posterior means from your air-only run for best results.
 #   2) Ensure models.jl defines solutionForward_thermal(P_therm_full, C_temp0, tspan)
 #      where P_therm_full = vcat(P_therm, P_air_fixed).
+# test add something to github
 
 using Random, LinearAlgebra, Statistics
 using RobustAdaptiveMetropolisSampler, CSV, DataFrames, Dates
