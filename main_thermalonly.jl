@@ -139,11 +139,11 @@ sigma_init = vcat(fill(0.10, 19),   # R
 include("visualize.jl")
 
 # -------------------- Sliding-window MCMC --------------------
-mkpath("Figures/thermonly_windows")
+mkpath("Figures/test2newPos")
 
 time_window_size = 200
-
-for i in 100:(N_real - time_window_size)
+win_step = 10
+for i in 360:win_step:(N_real - time_window_size)#100:win_step:350#(N_real - time_window_size)
     window_start = i
     window_end   = window_start + time_window_size
     f_temp_window = f_temp_noise[:, window_start:window_end]
@@ -180,10 +180,14 @@ for i in 100:(N_real - time_window_size)
         f_temp_noise, window_start, window_end,
         P_therm_mean, T0_mean, σT_mean
     )
-    savefig(plt, "Figures/thermonly_windows/thermonly_window_$(i).png")
+    savefig(plt, "Figures/test2newPos/thermonly_window_$(i).png")
 
     # CSV log: (index, 27 thermal, 8 T0, 8 σT)
-    open("Figures/thermonly_windows/thermonly_log.csv", "a") do f
+    open("Figures/test2newPos/thermonly_log.csv", "a") do f
         write(f, join([i; P_therm_mean; T0_mean; σT_mean], ",") * "\n")
     end
 end
+
+
+# window_start,R_A_Atm,R_B_Atm,R_C_Atm,R_D_Atm,R_E_Atm,R_F_Atm,R_H1_Atm,R_H2_Atm,R_A_B,R_B_C,R_C_D,R_A_H1,R_B_H1,R_C_H2,R_D_H2,R_H1_E,R_H2_F,R_E_F,R_H1_H2,C_A,C_B,C_C,C_D,C_E,C_F,C_H1,C_H2,T0_A,T0_B,T0_C,T0_D,T0_E,T0_F,T0_H1,T0_H2,sigmaT_A,sigmaT_B,sigmaT_C,sigmaT_D,sigmaT_E,sigmaT_F,sigmaT_H1,sigmaT_H2
+# test for coding
